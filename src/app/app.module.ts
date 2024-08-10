@@ -5,18 +5,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { ProdutoComponent } from './produto/produto.component';
+import { ListarClienteComponent } from './listar-cliente/listar-cliente.component';
+import { ListarProdutoComponent } from './listar-produto/listar-produto.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,    
     ClienteComponent,
-    ProdutoComponent
+    ProdutoComponent,
+    ListarClienteComponent,
+    ListarProdutoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
