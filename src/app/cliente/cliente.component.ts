@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from './model/cliente.model';
-import { ClienteService } from '../services/cliente/cliente.service';
+import { ClienteService } from '../../app/services/cliente/cliente.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-cliente',
@@ -16,16 +17,27 @@ export class ClienteComponent implements OnInit {
     public loading?: boolean;
     public mensagem?: string;
 
-    public constructor(private clienteService: ClienteService) {}
+    public constructor(private clienteService: ClienteService,
+      private route: ActivatedRoute) {}
 
-    ngOnInit(): void {      
+    ngOnInit(): void {     
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        var id = params.get('id');
+        if (id == null) return;
+        this.clienteService.buscarPorId(id).subscribe(cliente => {
+          this.nome = cliente.nome;
+          this.email = cliente.email;
+        });
+      }); 
     }
 
     salvar() {
       this.mensagem = "";
       this.loading = true;
+      
       this.cliente.nome = this.nome;
       this.cliente.email = this.email;
+      
       this.clienteService.salvar(this.cliente).subscribe(cliente => {        
         this.mensagem = `Cliente ${cliente.id} salvo com sucesso`;
         this.loading = false;
@@ -35,4 +47,5 @@ export class ClienteComponent implements OnInit {
         this.mensagem = `Erro: ${error.message}`;
       });
     }
+
 }
