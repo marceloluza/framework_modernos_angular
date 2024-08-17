@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'cliente/:id', component: ClienteComponent },
   { path: 'listar-cliente', component: ListarClienteComponent},
   { path: 'produto', component: ProdutoComponent },
+  { path: 'produto/:id', component: ProdutoComponent },
   { path: 'listar-produto', component: ListarProdutoComponent },
 ];
 
